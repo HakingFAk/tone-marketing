@@ -2,15 +2,15 @@ import express from "express";
 import helmet from "helmet";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 
-import { registerOAuthRoutes } from "../server/_core/oauth";
-import { createContext } from "../server/_core/context";
+import { registerOAuthRoutes } from "../server/_core/oauth.js";
+import { createContext } from "../server/_core/context.js";
 import {
   apiRateLimiter,
   assertRuntimeSecurity,
   authRateLimiter,
   rejectCrossOriginWrites,
-} from "../server/_core/security";
-import { appRouter } from "../server/routers";
+} from "../server/_core/security.js";
+import { appRouter } from "../server/routers.js";
 
 assertRuntimeSecurity();
 
