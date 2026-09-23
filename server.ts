@@ -3,15 +3,15 @@ import helmet from "helmet";
 import path from "node:path";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 
-import { registerOAuthRoutes } from "./server/_core/oauth";
-import { createContext } from "./server/_core/context";
+import { registerOAuthRoutes } from "./server/_core/oauth.ts";
+import { createContext } from "./server/_core/context.ts";
 import {
   apiRateLimiter,
   assertRuntimeSecurity,
   authRateLimiter,
   rejectCrossOriginWrites,
-} from "./server/_core/security";
-import { appRouter } from "./server/routers";
+} from "./server/_core/security.ts";
+import { appRouter } from "./server/routers.ts";
 
 assertRuntimeSecurity();
 
