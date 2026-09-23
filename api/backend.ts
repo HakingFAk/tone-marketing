@@ -44,7 +44,7 @@ app.use("/oauth", authRateLimiter);
 registerOAuthRoutes(app);
 
 app.use(
-  "/trpc",
+  ["/trpc", "/api/trpc"],
   createExpressMiddleware({
     router: appRouter,
     createContext,
