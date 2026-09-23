@@ -29,8 +29,8 @@ app.use(
   }),
 );
 
-app.use("/api", apiRateLimiter);
-app.use("/api", rejectCrossOriginWrites);
+app.use(apiRateLimiter);
+app.use(rejectCrossOriginWrites);
 
 app.use(express.json({ limit: "2mb" }));
 app.use(
@@ -40,11 +40,11 @@ app.use(
   }),
 );
 
-app.use("/api/oauth", authRateLimiter);
+app.use("/oauth", authRateLimiter);
 registerOAuthRoutes(app);
 
 app.use(
-  "/api/trpc",
+  "/trpc",
   createExpressMiddleware({
     router: appRouter,
     createContext,
