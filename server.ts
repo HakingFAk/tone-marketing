@@ -1,5 +1,6 @@
 import express from "express";
 import helmet from "helmet";
+import path from "node:path";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 
 import { registerOAuthRoutes } from "./server/_core/oauth";
@@ -28,7 +29,11 @@ app.use(
               defaultSrc: ["'self'"],
               baseUri: ["'self'"],
               connectSrc: ["'self'", "https:"],
-              fontSrc: ["'self'", "data:", "https://fonts.gstatic.com"],
+              fontSrc: [
+                "'self'",
+                "data:",
+                "https://fonts.gstatic.com",
+              ],
               frameAncestors: ["'self'"],
               imgSrc: ["'self'", "data:", "blob:", "https:"],
               mediaSrc: ["'self'", "blob:", "https:"],
@@ -44,19 +49,35 @@ app.use(
           }
         : false,
     crossOriginEmbedderPolicy: false,
-    referrerPolicy: { policy: "strict-origin-when-cross-origin" },
+    referrerPolicy: {
+      policy: "strict-origin-when-cross-origin",
+    },
   }),
 );
 
+/*
+ * API
+ */
 app.use("/api", apiRateLimiter);
 app.use("/api", rejectCrossOriginWrites);
 
 app.use(express.json({ limit: "2mb" }));
-app.use(express.urlencoded({ limit: "100kb", extended: false }));
+app.use(
+  express.urlencoded({
+    limit: "100kb",
+    extended: false,
+  }),
+);
 
+/*
+ * OAuth
+ */
 app.use("/api/oauth", authRateLimiter);
 registerOAuthRoutes(app);
 
+/*
+ * tRPC
+ */
 app.use(
   "/api/trpc",
   createExpressMiddleware({
@@ -64,5 +85,37 @@ app.use(
     createContext,
   }),
 );
+
+/*
+ * Frontend React/Vite
+ *
+ * O comando `pnpm run build` gera o frontend em:
+ * dist/public
+ */
+const clientDistPath = path.resolve(
+  process.cwd(),
+  "dist",
+  "public",
+);
+
+/*
+ * Arquivos estáticos:
+ * /assets/*
+ * /media/*
+ * etc.
+ */
+app.use(express.static(clientDistPath));
+
+/*
+ * SPA fallback.
+ *
+ * Qualquer rota que não tenha sido atendida pela API
+ * ou pelos arquivos estáticos recebe o index.html.
+ *
+ * Express 5 usa a sintaxe /{*splat}.
+ */
+app.get("/{*splat}", (_req, res) => {
+  res.sendFile(path.join(clientDistPath, "index.html"));
+});
 
 export default app;
