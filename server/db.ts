@@ -1,9 +1,9 @@
 import { and, asc, desc, eq, gt, gte, like, or } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import { analyticsEvents, ambientTracks, InsertAnalyticsEvent, InsertAmbientTrack, InsertProduct, InsertProductDocument, InsertProductImage, InsertProductVideo, InsertSale, productDocuments, productImages, productVideos, products, sales, users } from "../drizzle/schema";
-import { ENV } from "./_core/env";
-import { isPromotionLive } from "./promotionPolicy";
+import { analyticsEvents, ambientTracks, InsertAnalyticsEvent, InsertAmbientTrack, InsertProduct, InsertProductDocument, InsertProductImage, InsertProductVideo, InsertSale, productDocuments, productImages, productVideos, products, sales, users } from "../drizzle/schema.js";
+import { ENV } from "./_core/env.js";
+import { isPromotionLive } from "./promotionPolicy.js";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 let _pool: Pool | null = null;

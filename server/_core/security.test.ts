@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getTrustedOrigins } from "./security";
+import { getTrustedOrigins } from "./security.js";
 
 describe("trusted origins", () => {
   it("uses only the configured origin in production", () => {

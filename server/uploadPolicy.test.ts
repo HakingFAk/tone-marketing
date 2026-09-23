@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { extensionForContentType, parseProductImage } from "./uploadPolicy";
+import { extensionForContentType, parseProductImage } from "./uploadPolicy.js";
 
 describe("upload policy", () => {
   it("accepts a valid PNG payload", () => {

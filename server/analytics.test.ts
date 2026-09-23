@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import type { TrpcContext } from "./_core/context";
-import { appRouter } from "./routers";
+import type { TrpcContext } from "./_core/context.js";
+import { appRouter } from "./routers.js";
 
 function userContext(role: "user" | "admin"): TrpcContext {
   return {

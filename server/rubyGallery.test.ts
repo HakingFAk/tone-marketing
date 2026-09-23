@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { RUBY_GALLERY_IMAGE_ASSETS, getRubyGalleryAdditions } from "./rubyGallery";
+import { RUBY_GALLERY_IMAGE_ASSETS, getRubyGalleryAdditions } from "./rubyGallery.js";
 
 describe("ruby test guitar gallery", () => {
   it("provides four distinct supplemental images for the test product", () => {

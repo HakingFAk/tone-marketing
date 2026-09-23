@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { shouldPublishVideo } from "./videoPolicy";
+import { shouldPublishVideo } from "./videoPolicy.js";
 
 describe("video publication policy", () => {
   it("allows published instrument demonstrations", () => {

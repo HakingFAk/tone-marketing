@@ -1,13 +1,14 @@
 import { z } from "zod";
-import { COOKIE_NAME } from "@shared/const";
-import { getSessionCookieOptions } from "./_core/cookies";
-import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
+import { COOKIE_NAME } from "../shared/const.js";
+import { getSessionCookieOptions } from "./_core/cookies.js";
+import { protectedProcedure, publicProcedure, router } from "./_core/trpc.js";
 import { TRPCError } from "@trpc/server";
-import { createAmbientTrack, createProduct, createProductDocument, createSale, createVideo, deleteAmbientTrack, deleteProduct, deleteProductDocument, deleteVideo, getExecutiveSummary, getProductBySlug, listAmbientTracks, listProductDocuments, listProducts, listVideos, recordAnalyticsEvent, seedAmbientTrackTests, seedMediaTests, updateAmbientTrack, updateProduct, updateProductDocument, updateVideo } from "./db";
-import { storageCreateUploadUrl, storagePut } from "./storage";
-import { getBrlToUsdQuote } from "./exchangeRates";
-import { extensionForContentType, parseProductImage } from "./uploadPolicy";
-import { shouldPublishVideo } from "./videoPolicy";
+import { createAmbientTrack, createProduct, createProductDocument, createSale, createVideo, deleteAmbientTrack, deleteProduct, deleteProductDocument, deleteVideo, getExecutiveSummary, getProductBySlug, listAmbientTracks, listProductDocuments, listProducts, listVideos, recordAnalyticsEvent, seedAmbientTrackTests, seedMediaTests, updateAmbientTrack, updateProduct, updateProductDocument, updateVideo } from "./db.js";
+
+import { storageCreateUploadUrl, storagePut } from "./storage.js";
+import { getBrlToUsdQuote } from "./exchangeRates.js";
+import { extensionForContentType, parseProductImage } from "./uploadPolicy.js";
+import { shouldPublishVideo } from "./videoPolicy.js";
 
 const categories = ["Guitarras", "Violões", "Pedais", "Amplificadores", "Acessórios"] as const;
 const productInput = z.object({

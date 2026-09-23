@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isPromotionLive } from "./promotionPolicy";
+import { isPromotionLive } from "./promotionPolicy.js";
 
 describe("isPromotionLive", () => {
   const now = new Date("2026-08-13T16:00:00.000Z");
