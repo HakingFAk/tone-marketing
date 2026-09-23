@@ -3,8 +3,12 @@
   "outputDirectory": "dist/public",
   "rewrites": [
     {
+      "source": "/api/trpc/:path*",
+      "destination": "/api/backend/trpc/:path*"
+    },
+    {
       "source": "/api/:path*",
-      "destination": "/api/backend"
+      "destination": "/api/backend/:path*"
     },
     {
       "source": "/(.*)",
