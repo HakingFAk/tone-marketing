@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: tone-marketing-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tone_marketing
+      POSTGRES_USER: tone_user
+      POSTGRES_PASSWORD: troque-esta-senha
+    ports:
+      - "5432:5432"
+    volumes:
+      - tone_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  tone_postgres_data:

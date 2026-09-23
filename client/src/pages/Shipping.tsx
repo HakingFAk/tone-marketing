@@ -1,0 +1,26 @@
+import React from "react";
+import { Link } from "wouter";
+import { ArrowLeft, FileCheck2, Globe2, MessageCircle, PackageCheck, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { LanguageToggle, useLanguage } from "@/lib/i18n";
+
+const WHATSAPP = "5565993074442";
+
+export default function Shipping() {
+  const { language } = useLanguage();
+  const english = language === "en";
+  const steps = english ? [
+    ["1", "Tell us where you are", "Share the instrument, your city and country, and whether you prefer pickup or delivery."],
+    ["2", "Receive the right route", "Tone confirms local pickup, Brazilian delivery, or international freight, packing and insurance options."],
+    ["3", "Confirm directly on WhatsApp", "Payment, dispatch timing and, when applicable, import duties are agreed individually before the sale."],
+  ] : [
+    ["1", "Conte onde você está", "Informe o instrumento, sua cidade e país, e se prefere retirada ou entrega."],
+    ["2", "Receba a rota certa", "A Tone confirma retirada local, envio nacional ou frete internacional, além de embalagem e seguro."],
+    ["3", "Confirme direto no WhatsApp", "Pagamento, prazo de despacho e, quando necessário, impostos de importação são combinados individualmente antes da venda."],
+  ];
+  const message = english
+    ? "Hello! I would like a shipping quote within Brazil or internationally from Tone Market."
+    : "Olá! Gostaria de uma cotação de envio dentro do Brasil ou internacional pela Tone Market.";
+
+  return <div className="min-h-screen bg-[#0b0b0c] text-white"><header className="border-b border-white/10"><div className="container flex h-20 items-center justify-between"><Link href="/" className="flex items-center gap-2 text-sm text-white/60 hover:text-white"><ArrowLeft size={17}/>{english ? "Back to store" : "Voltar à loja"}</Link><div className="flex items-center gap-3"><LanguageToggle/><img src="/media/tone-market-logo_77240e37.jpg" alt="Tone Market" className="h-10 w-14 rounded-lg object-cover"/></div></div></header><main className="container py-16 lg:py-24"><div className="max-w-3xl"><p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[.25em] text-red-400"><Globe2 size={15}/>{english ? "Brazil & worldwide shipping" : "Envios no Brasil e exterior"}</p><h1 className="mt-5 text-5xl font-black tracking-[-.05em] sm:text-7xl">{english ? "Clearer shipping. Real conversation." : "Envio mais claro. Conversa real."}</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-white/60">{english ? "Tone Market serves musicians and collectors from Cuiabá across Brazil and worldwide. The site does not process payment or calculate a final landed cost. Every pickup, domestic delivery or international shipment is reviewed individually on WhatsApp." : "A Tone Market atende músicos e colecionadores de Cuiabá para todo o Brasil e também para o exterior. O site não processa pagamentos nem calcula custos finais automaticamente. Cada retirada, entrega nacional ou envio internacional é analisado individualmente pelo WhatsApp."}</p></div><section className="mt-14 grid gap-5 lg:grid-cols-3">{steps.map(([number, title, body]) => <article key={number} className="rounded-3xl border border-white/10 bg-white/[.035] p-6"><span className="text-3xl font-black text-red-400">{number}</span><h2 className="mt-8 text-xl font-bold">{title}</h2><p className="mt-3 leading-7 text-white/55">{body}</p></article>)}</section><section className="mt-10 grid gap-5 rounded-3xl border border-red-500/20 bg-red-500/[.04] p-7 sm:grid-cols-2"><div><p className="text-xs font-bold uppercase tracking-[.22em] text-red-300">{english ? "What is confirmed in the conversation" : "O que é confirmado na conversa"}</p><ul className="mt-5 space-y-3 text-sm leading-6 text-white/65"><li className="flex gap-3"><PackageCheck className="shrink-0 text-red-400" size={18}/>{english ? "Pickup, domestic delivery or freight route, packing and timeline." : "Retirada, entrega nacional ou rota de frete, embalagem e prazo."}</li><li className="flex gap-3"><ShieldCheck className="shrink-0 text-red-400" size={18}/>{english ? "Insurance availability and the value declared for shipment." : "Disponibilidade de seguro e valor declarado no envio."}</li><li className="flex gap-3"><FileCheck2 className="shrink-0 text-red-400" size={18}/>{english ? "Available invoice, case, accessories and product documentation." : "Nota fiscal, case, acessórios e documentação disponível do produto."}</li></ul></div><div className="rounded-2xl border border-white/10 bg-black/25 p-5"><h2 className="text-xl font-bold">{english ? "No checkout by design." : "Sem checkout por escolha."}</h2><p className="mt-3 text-sm leading-6 text-white/55">{english ? "Final payment options and shipping conditions depend on the destination and are confirmed directly with Tone before a transaction is completed." : "As opções finais de pagamento e as condições de envio dependem do destino e são confirmadas diretamente com a Tone antes da conclusão da negociação."}</p><a href={`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`} target="_blank" rel="noreferrer"><Button className="mt-5 w-full rounded-xl bg-red-600 hover:bg-red-500"><MessageCircle size={18}/>{english ? "Start on WhatsApp" : "Começar pelo WhatsApp"}</Button></a></div></section></main></div>;
+}
